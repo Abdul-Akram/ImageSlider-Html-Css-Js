@@ -1,0 +1,99 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Image Slider</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+    
+        body {
+            height: 100vh;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            background: linear-gradient(#2e2e2e, #3e3e3e);
+            font-family: Arial, sans-serif;
+        }
+    
+        .container {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            background-color: rgba(255, 255, 255, 0.1);
+            padding: 10px;
+            border-radius: 10px;
+            box-shadow: 0 8px 15px rgba(0, 0, 0, 0.3);
+        }
+    
+        img {
+            border: 5px solid rgba(255, 255, 255, 0.3);
+            border-radius: 10px;
+            transition: transform 0.4s ease;
+        }
+    
+        img:hover {
+            transform: scale(1.05);
+        }
+    
+        .prev,
+        .next {
+            padding: 1rem;
+            cursor: pointer;
+            background-color: rgba(0, 0, 0, 0.5);
+            color: white;
+            border: none;
+            border-radius: 50%;
+            margin: 0 10px;
+            transition: background-color 0.3s ease;
+        }
+    
+        .prev:hover,
+        .next:hover {
+            background-color: rgba(255, 255, 255, 0.5);
+            color: black;
+        }
+    
+    </style>
+    
+</head>
+
+<body>
+    <div class="container">
+        <button class="prev" onclick="prev()">&lt;</button>
+        <div class="image">
+            <img src="source/1.jpg" width="600" alt="image">
+        </div>
+        <button class="next" onclick="next()">&gt;</button>
+    </div>
+    <script>
+        const imageList = ["1", "2", "3"]
+        let currentImage = 0;
+        let intervalId = setInterval(() => {
+            currentImage = (currentImage + 1) % imageList.length;
+            document.querySelector('.image img').src = `source/${imageList[currentImage]}.jpg`
+            }, 6000);
+        function prev() {
+            currentImage = (currentImage - 1 + imageList.length) % imageList.length;
+            updateImage();
+        }
+        function next() {
+            currentImage = (currentImage + 1) % imageList.length;
+            updateImage();
+        }
+        function updateImage() {
+            const image = document.querySelector('.image img');
+            image.src = `source/${imageList[currentImage]}.jpg`
+        }
+
+
+
+    </script>
+</body>
+
+</html>
